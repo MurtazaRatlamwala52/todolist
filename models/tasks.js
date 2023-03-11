@@ -1,18 +1,28 @@
 module.exports = (sequelize, Datatypes) => {
-    const users = sequelize.define('users', {
+    const tasks = sequelize.define('tasks', {
         task: {
             type: Datatypes.STRING,
-            allownull: false
+            allowNull: false
         },
-        startDate: {
+        description: {
             type: Datatypes.STRING,
-            allownull: false,
-        },EndDate: {
-            type: Datatypes.STRING,
-            allownull: false
-    }
-}, {
+        },Start: {
+            type: Datatypes.DATE,
+        },End: {
+            type: Datatypes.DATE,
+        },Status: {
+            type: Datatypes.ENUM,
+            values: ['pending' , 'complete'],
+            allowNull: false,
+            defaultValue: 'pending'
+        },Remarks: {
+            type: Datatypes.ENUM,
+            values: ['On time', 'Late', 'pending'],
+            allowNull: false,
+            defaultValue: 'pending'
+        }
+    }, {
     timestamps: false
 })
-return users
+return tasks
 }

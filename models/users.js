@@ -5,21 +5,28 @@ module.exports = (sequelize, Datatypes) => {
     const users = sequelize.define('users', {
         name: {
             type: Datatypes.STRING,
-            allownull: false
+            allowNull: false
         },
         email: {
             type: Datatypes.STRING,
-            allownull: false,
+            allowNull: false,
             validate: {
                 isEmail: true
             }
         },password: {
             type: Datatypes.STRING,
-            allownull: false,
+            allowNull: false,
             set(value){
                 this.setDataValue('password', bcrypt.hashSync(value, 10))
             }
-    }
+        },role: {
+            type: Datatypes.ENUM,
+            values: ['Manager', 'Employee'],
+            allowNull:  false,
+            defaultValue: 'Employee'
+        },token: {
+            type: Datatypes.STRING
+        }
 }, {
     timestamps: false
 })
